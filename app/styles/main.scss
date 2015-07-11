@@ -30,6 +30,7 @@ body {
 /* Navbar Styling */
 .navbar{
     border: none;
+    border-radius: 0;
     background-color: #6C7A89;
 }
 
@@ -37,7 +38,6 @@ body {
 .footer {
   padding-top: 19px;
   color: #777;
-  border-top: 1px solid #e5e5e5;
 }
 
 .container-narrow > hr {
