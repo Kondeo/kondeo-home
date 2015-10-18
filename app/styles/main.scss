@@ -14,7 +14,21 @@ body {
   padding: 0;
   color: white;
   font-weight: 300;
-  background-color: black;
+}
+
+a {
+    color: green;
+    text-decoration: none;
+}
+
+a:hover {
+    text-decoration: none;
+    color: green;
+}
+
+@keyframes fadeBG {
+    from {background-color: darkgrey;}
+    to {background-color: slategrey;}
 }
 
 .background-image {
@@ -25,7 +39,11 @@ body {
     height: 1000px;
     z-index: -1;
     display: block;
-    background-image: url("../images/code.png");
+    background-color: black;
+    animation-fill-mode: forwards;
+    -webkit-animation-fill-mode: forwards;
+    animation-name: fadeBG;
+    animation-duration: 4s;
     background-position: -10px 0px;
     background-size: cover;
     -webkit-filter: blur(2px);
@@ -55,15 +73,38 @@ body {
     background-color: transparent;
 }
 
+.navbar-default .navbar-brand {
+    color: darkred;
+    -webkit-transition: all .3s;
+    transition: all .3s;
+}
+
+.navbar-default .navbar-brand:hover{
+    transform: scale(1.1);
+    -webkit-transform: scale(1.1);
+    color: darkred;
+}
+
+.navbar-default .navbar-nav > li > a {
+    color:white;
+    -webkit-transition: background-color .3s;
+    transition: background-color .3s;
+}
+
+.navbar-default .navbar-nav > li:hover > a {
+    color:white;
+    background-color: rgba(255,255,255,0.3);
+}
+
 .navbar-default .navbar-nav > .active > a, .navbar-default .navbar-nav > .active > a:hover, .navbar-default .navbar-nav > .active > a:focus {
     background-color: rgba(255,255,255,0.5);
-    color:black;
+    color:white;
 }
 
 /* Custom page footer */
 .footer {
   padding-top: 19px;
-  color: #777;
+  color: black;
 }
 
 .container-narrow > hr {
