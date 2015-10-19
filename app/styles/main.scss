@@ -3,6 +3,11 @@ $icon-font-path: "../bower_components/bootstrap-sass-official/assets/fonts/boots
 @import "bootstrap-sass-official/assets/stylesheets/_bootstrap.scss";
 // endbower
 
+@font-face {
+    font-family: kondeoHome;
+    src: url(fonts/palette_becker.ttf);
+}
+
 .browsehappy {
   margin: 0.2em 0;
   background: #ccc;
@@ -15,6 +20,7 @@ body {
   color: white;
   font-weight: 300;
   background-color: #3D4658;
+
 }
 
 a {
@@ -81,15 +87,21 @@ a:hover {
 
 .navbar-default .navbar-brand {
     font-weight: 500;
-    color: #BE757E;
+    color: #E44235;
     -webkit-transition: all .3s;
     transition: all .3s;
+    font-size: 30px;
+    font-family: kondeoHome;
 }
 
 .navbar-default .navbar-brand:hover{
     transform: scale(1.1);
     -webkit-transform: scale(1.1);
-    color: #BE757E;
+    color: #E44235;
+}
+
+.navbar-default .navbar-brand:visited{
+    color: #E44235;
 }
 
 .navbar-default .navbar-nav > li > a {
@@ -132,9 +144,18 @@ a:hover {
     background-color: inherit;
     border: 2px solid #3D4658;
 
+  img {
+    height: 80px;
+    margin-bottom: 30px;
+  }
+
   .btn {
     font-size: 21px;
     padding: 14px 24px;
+  }
+
+  h1 {
+      font-family: kondeoHome;
   }
 }
 
