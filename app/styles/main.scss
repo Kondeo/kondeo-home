@@ -8,6 +8,32 @@ $icon-font-path: "../bower_components/bootstrap-sass-official/assets/fonts/boots
     src: url(fonts/palette_becker.ttf);
 }
 
+/* slide in from the bottom */
+@keyframes slideInUp {
+    from    { transform:translateY(100%); }
+    to      { transform: translateY(0); }
+}
+
+@keyframes fadeIn {
+  from { opacity:0; }
+  to { opacity:1; }
+}
+
+@-webkit-keyframes fadeIn {
+  from { opacity:0; }
+  to { opacity:1; }
+}
+
+@keyframes fadeOut {
+  from { opacity:1; }
+  to { opacity:0; }
+}
+
+@-webkit-keyframes fadeOut {
+  from { opacity:1; }
+  to { opacity:0; }
+}
+
 .browsehappy {
   margin: 0.2em 0;
   background: #ccc;
@@ -34,6 +60,14 @@ a:hover {
 }
 a:visited {
     color: #38B8EC;
+}
+
+.ng-enter{
+    animation: fadeIn 1s linear;
+      -webkit-animation: fadeIn 1s linear;
+}
+.ng-leave {
+
 }
 
 @keyframes fadeBG {
