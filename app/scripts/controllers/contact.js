@@ -9,7 +9,7 @@
  */
 angular.module('kondeoHomeApp')
   .controller('ContactCtrl', function ($scope) {
-    $scope.awesomeThings = [
+    this.awesomeThings = [
       'HTML5 Boilerplate',
       'AngularJS',
       'Karma'

@@ -1,0 +1,193 @@
+.browsehappy {
+  margin: 0.2em 0;
+  background: $yeomanBg;
+  color: $standard;
+  padding: 0.2em 0;
+}
+
+body {
+  padding: 0;
+  color: $buttonText;
+  font-weight: 300;
+  background-color: $pageBg;
+
+}
+
+a {
+    color: $linkColor;
+    text-decoration: none;
+    font-weight: 400;
+}
+a:hover {
+    text-decoration: none;
+    color: $linkColor;
+}
+a:visited {
+    color: $linkColor;
+}
+
+.ng-enter{
+    animation: fadeIn 1s linear;
+      -webkit-animation: fadeIn 1s linear;
+}
+.ng-leave {
+
+}
+
+.background-image {
+    position: fixed;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    height: 1000px;
+    z-index: -1;
+    display: block;
+    background-color: $standard;
+    animation-fill-mode: forwards;
+    -webkit-animation-fill-mode: forwards;
+    animation-name: fadeBG;
+    animation-duration: 4s;
+    background-position: -10px 0px;
+    background-size: cover;
+    -webkit-filter: blur(2px);
+    -moz-filter: blur(2px);
+    -o-filter: blur(2px);
+    -ms-filter: blur(2px);
+    filter: blur(2px);
+}
+
+/* Custom page header */
+.header {
+  margin-bottom: 10px;
+
+  .navbar {
+      border-bottom: 2px solid $pageBg;
+  }
+
+  /* Make the masthead heading the same height as the navigation */
+  h3 {
+    margin-top: 0;
+    margin-bottom: 0;
+    line-height: 40px;
+    padding-bottom: 19px;
+  }
+}
+
+/* Navbar Styling */
+.navbar{
+    border: none;
+    border-radius: 0;
+    background-color: transparent;
+    border-bottom: 2px solid $pageBg;
+}
+
+.navbar-default .navbar-brand {
+    font-weight: 500;
+    color: #E44235;
+    -webkit-transition: all .3s;
+    transition: all .3s;
+    font-size: 30px;
+    font-family: kondeoHome;
+}
+
+.navbar-default .navbar-brand:hover{
+    transform: scale(1.1);
+    -webkit-transform: scale(1.1);
+    color: #E44235;
+}
+
+.navbar-default .navbar-brand:visited{
+    color: #E44235;
+}
+
+.navbar-default .navbar-nav > li > a {
+    color:white;
+    -webkit-transition: background-color .3s;
+    transition: background-color .3s;
+}
+
+.navbar-default .navbar-nav > li:hover > a {
+    color:white;
+    background-color: #454E60;
+}
+
+.navbar-default .navbar-nav > .active > a, .navbar-default .navbar-nav > .active > a:hover, .navbar-default .navbar-nav > .active > a:focus {
+    background-color: $pageBg;
+    color:white;
+}
+
+/* Custom page footer */
+.footer {
+  padding-top: 19px;
+  color: black;
+}
+
+.container-narrow > hr {
+  margin: 30px 0;
+}
+
+.btn {
+    box-shadow: 3px 3px 0px $pageBg;
+    background-color: brown;
+    border: 2px solid $pageBg;
+}
+
+/* Main marketing message and sign up button */
+.jumbotron {
+    text-align: center;
+    color: white;
+    box-shadow: 7px 7px 0px $pageBg;
+    background-color: inherit;
+    border: 2px solid $pageBg;
+
+  img {
+    height: 80px;
+    margin-bottom: 30px;
+  }
+
+  .btn {
+    color: white;
+    font-size: 21px;
+    padding: 14px 24px;
+  }
+
+  .btn:visited {
+      box-shadow: 3px 3px 0px $pageBg;
+      background-color: brown;
+      border: 2px solid $pageBg;
+  }
+
+  .btn:hover {
+      box-shadow: 3px 3px 0px $pageBg;
+      background-color: brown;
+      border: 2px solid $pageBg;
+  }
+
+  .btn:active {
+      box-shadow: 3px 3px 0px $pageBg;
+      background-color: #942626;
+      border: 2px solid $pageBg;
+  }
+
+  h1 {
+      font-family: kondeoHome;
+  }
+}
+
+/* Supporting marketing content */
+.marketing {
+  margin: 40px 0;
+
+  p + h4 {
+    margin-top: 28px;
+  }
+}
+
+/* Responsive: Portrait tablets and up */
+@media screen and (min-width: 768px) {
+  /* Space out the masthead */
+  .header {
+    margin-bottom: 30px;
+  }
+
+}
