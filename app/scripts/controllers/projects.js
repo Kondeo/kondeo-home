@@ -9,9 +9,12 @@
  */
 angular.module('kondeoHomeApp')
   .controller('ProjectsCtrl', function ($scope) {
-    $scope.awesomeThings = [
+
+    this.awesomeThings = [
       'HTML5 Boilerplate',
       'AngularJS',
       'Karma'
     ];
+
+    
   });

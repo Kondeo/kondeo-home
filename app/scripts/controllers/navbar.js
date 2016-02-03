@@ -8,8 +8,9 @@
  * Controller of the kondeoHomeApp
  */
 angular.module('kondeoHomeApp')
-  .controller('NavbarCtrl', function ($scope, $timeout, $location) {
-    $scope.awesomeThings = [
+  .controller('NavbarCtrl', function ($scope, $location) {
+
+    this.awesomeThings = [
       'HTML5 Boilerplate',
       'AngularJS',
       'Karma'

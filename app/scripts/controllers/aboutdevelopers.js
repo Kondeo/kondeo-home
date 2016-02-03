@@ -9,9 +9,12 @@
  */
 angular.module('kondeoHomeApp')
   .controller('AboutdevelopersCtrl', function () {
+
     this.awesomeThings = [
       'HTML5 Boilerplate',
       'AngularJS',
       'Karma'
     ];
+
+    
   });
