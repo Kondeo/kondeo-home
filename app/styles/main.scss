@@ -10,6 +10,13 @@ $icon-font-path: "../bower_components/bootstrap-sass-official/assets/fonts/boots
     src: url(fonts/palette_becker.ttf);
 }
 
+brand {
+  font-weight: 500;
+  color: #E44235;
+  font-size: 60px;
+  font-family: kondeoHome;
+}
+
 .browsehappy {
   margin: 0.2em 0;
   background: #ccc;
@@ -39,12 +46,10 @@ a:visited {
 }
 
 .ng-enter{
-    // animation: fadeIn 1s linear;
-    //   -webkit-animation: fadeIn 1s linear;
-    animation: bounceIn 1s both ease-in; z-index: 8888;
+  animation: bounceIn 1s both ease-in; z-index: 8888;
 }
 .ng-leave {
-  animation: fallOut 0.1s both ease-in; z-index: 8888;
+  animation: fallOut 0.12s both ease-in; z-index: 8888;
 }
 
 .background-image {
