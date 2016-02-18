@@ -3,35 +3,11 @@ $icon-font-path: "../bower_components/bootstrap-sass-official/assets/fonts/boots
 @import "bootstrap-sass-official/assets/stylesheets/_bootstrap.scss";
 // endbower
 
+@import ".animations.scss";
+
 @font-face {
     font-family: kondeoHome;
     src: url(fonts/palette_becker.ttf);
-}
-
-/* slide in from the bottom */
-@keyframes slideInUp {
-    from    { transform:translateY(100%); }
-    to      { transform: translateY(0); }
-}
-
-@keyframes fadeIn {
-  from { opacity:0; }
-  to { opacity:1; }
-}
-
-@-webkit-keyframes fadeIn {
-  from { opacity:0; }
-  to { opacity:1; }
-}
-
-@keyframes fadeOut {
-  from { opacity:1; }
-  to { opacity:0; }
-}
-
-@-webkit-keyframes fadeOut {
-  from { opacity:1; }
-  to { opacity:0; }
 }
 
 .browsehappy {
@@ -63,16 +39,12 @@ a:visited {
 }
 
 .ng-enter{
-    animation: fadeIn 1s linear;
-      -webkit-animation: fadeIn 1s linear;
+    // animation: fadeIn 1s linear;
+    //   -webkit-animation: fadeIn 1s linear;
+    animation: bounceIn 1s both ease-in; z-index: 8888;
 }
 .ng-leave {
-
-}
-
-@keyframes fadeBG {
-    from {background-color: #3D4658;}
-    to {background-color: #525A6C;}
+  animation: fallOut 0.1s both ease-in; z-index: 8888;
 }
 
 .background-image {
@@ -83,18 +55,13 @@ a:visited {
     height: 1000px;
     z-index: -1;
     display: block;
-    background-color: black;
+    background-color: #525A6C;
     animation-fill-mode: forwards;
     -webkit-animation-fill-mode: forwards;
     animation-name: fadeBG;
     animation-duration: 4s;
     background-position: -10px 0px;
     background-size: cover;
-    -webkit-filter: blur(2px);
-    -moz-filter: blur(2px);
-    -o-filter: blur(2px);
-    -ms-filter: blur(2px);
-    filter: blur(2px);
 }
 
 /* Custom page header */
