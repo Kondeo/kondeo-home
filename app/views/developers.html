@@ -1,0 +1,6 @@
+<div ng-if="developer == 'developers'">
+  Our Developers:<br />
+  <a ng-href="#/about/julianp">Julian Poyourow</a><br />
+  <a ng-href="#/about/aaront">Aaron Turner</a><br />
+</div>
+<div ng-if="developer != 'developers'" ng-include="developerURL"></div>

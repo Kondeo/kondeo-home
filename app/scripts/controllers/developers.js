@@ -8,10 +8,13 @@
  * Controller of the kondeoHomeApp
  */
 angular.module('kondeoHomeApp')
-  .controller('AboutdevelopersCtrl', function () {
+  .controller('DevelopersCtrl', function ($scope, $routeParams) {
     this.awesomeThings = [
       'HTML5 Boilerplate',
       'AngularJS',
       'Karma'
     ];
+
+    $scope.developer = $routeParams.developer;
+    $scope.developerURL = "views/developers/" + $scope.developer + ".html";
   });

@@ -43,9 +43,9 @@ angular
         templateUrl: 'views/contract.html',
         controller: 'ContractCtrl'
       })
-      .when('/about/developers', {
-        templateUrl: 'views/aboutdevelopers.html',
-        controller: 'AboutdevelopersCtrl',
+      .when('/about/:developer', {
+        templateUrl: 'views/developers.html',
+        controller: 'DevelopersCtrl',
         controllerAs: 'aboutDevelopers'
       })
       .otherwise({
