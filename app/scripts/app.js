@@ -35,6 +35,14 @@ angular
         templateUrl: 'views/contact.html',
         controller: 'ContactCtrl'
       })
+      .when('/panel', {
+        templateUrl: 'views/panel/panel.html',
+        controller: 'PanelCtrl'
+      })
+      .when('/panel/contract', {
+        templateUrl: 'views/contract.html',
+        controller: 'ContractCtrl'
+      })
       .when('/about/developers', {
         templateUrl: 'views/aboutdevelopers.html',
         controller: 'AboutdevelopersCtrl',
