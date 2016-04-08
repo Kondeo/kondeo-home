@@ -126,7 +126,7 @@ router.put('/self/:token', function(req, res, next) {
             var updatedUser = {};
 
             if (req.body.email && typeof req.body.email === 'string') updatedUser.email = req.body.email;
-            if (req.body.requireNewPassword) updatedUser.requireNewPassword = req.body.requireNewPassword;
+            if (typeof req.body.requireNewPassword == 'boolean') updatedUser.requireNewPassword = req.body.requireNewPassword;
             if (req.body.password && typeof req.body.password === 'string') {
                 //Create a random salt
                 var salt = crypto.randomBytes(128).toString('base64');
