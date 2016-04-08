@@ -90,6 +90,38 @@ a:visited {
   margin-top: 5px;
 }
 
+.panel-dash-container {
+  width: 100%;
+  position: relative;
+}
+
+.panel-dash {
+  width: calc(50% - 5px);
+  position: absolute;
+  border-radius: 8px;
+  background-color: rgba(0,0,0,0.2);
+  padding: 10px;
+}
+
+.panel-dash-left {
+  left: 0;
+}
+
+.panel-dash-right {
+  left: calc(50% + 5px);
+}
+
+@media screen and (max-width: 600px) {
+  .panel-dash {
+    position: relative;
+    width: 100%;
+  }
+  .panel-dash-right {
+    margin-top: 10px;
+    left: 0;
+  }
+}
+
 .ng-enter{
   animation: bounceIn 1s both ease-in; z-index: 8888;
 }
