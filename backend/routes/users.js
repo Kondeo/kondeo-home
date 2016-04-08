@@ -1,5 +1,9 @@
-var express = require('express');
-var router = express.Router();
+var express = require('express'),
+  router = express.Router(),
+  mongoose = require('mongoose'),
+  crypto = require('crypto'),
+  SessionService = require('../services/sessions.js'),
+  User = mongoose.model('User');
 
 /* GET users listing. */
 router.get('/', function(req, res, next) {
@@ -7,8 +11,7 @@ router.get('/', function(req, res, next) {
 });
 
 router.post('/register', function(req, res) {
-    if(!(req.body.cardToken &&
-        req.body.email &&
+    if(!(req.body.email &&
         req.body.password)){
         return res.status(412).json({
             msg: "Route requisites not met."
@@ -32,40 +35,31 @@ router.post('/register', function(req, res) {
                     msg: "Email taken!"
                 });
             } else {
-                StripeService.charge(req.body.cardToken, CONST.SUBSCRIPTION_PRICE.NEW, function(charge){
-                    //Create a random salt
-                    var salt = crypto.randomBytes(128).toString('base64');
-                    //Create a unique hash from the provided password and salt
-                    var hash = crypto.pbkdf2Sync(req.body.password, salt, 10000, 512);
-                    //Create a new user with the assembled information
-                    var subscriptionDate = moment().add(1, 'y');
-                    var newUser = new User({
-                        email: (req.body.email.toLowerCase()).trim(),
-                        password: hash,
-                        salt: salt,
-                        subscription: subscriptionDate.toDate()
-                    }).save(function(err, newUser) {
-                        if (err) {
-                          console.log("Error saving user to DB!");
-                          res.status(500).json({
-                              msg: "Error saving user to DB!"
-                          });
-                        } else {
-                            SessionService.generateSession(newUser._id, "user", function(token){
-                                //All good, give the user their token
-                                res.status(201).json({
-                                    token: token,
-                                    subscription: subscriptionDate.toDate()
-                                });
-                            }, function(err){
-                                res.status(err.status).json(err);
+                //Create a random salt
+                var salt = crypto.randomBytes(128).toString('base64');
+                //Create a unique hash from the provided password and salt
+                var hash = crypto.pbkdf2Sync(req.body.password, salt, 10000, 512);
+                //Create a new user with the assembled information
+                var newUser = new User({
+                    email: (req.body.email.toLowerCase()).trim(),
+                    password: hash,
+                    salt: salt
+                }).save(function(err, newUser) {
+                    if (err) {
+                      console.log("Error saving user to DB!");
+                      res.status(500).json({
+                          msg: "Error saving user to DB!"
+                      });
+                    } else {
+                        SessionService.generateSession(newUser._id, "user", function(token){
+                            //All good, give the user their token
+                            res.status(201).json({
+                                token: token
                             });
-                        }
-                    });
-                }, function(err){
-                    res.status(402).json({
-                        msg: "Card was declined!"
-                    });
+                        }, function(err){
+                            res.status(err.status).json(err);
+                        });
+                    }
                 });
             }
           });
@@ -84,7 +78,7 @@ router.post('/login', function(req, res, next) {
     User.findOne({
         email: (req.body.email.toLowerCase()).trim()
     })
-    .select('password salt subscription admin')
+    .select('password salt admin')
     .exec(function(err, user) {
         if (err) {
             res.status(500).json({
@@ -100,24 +94,16 @@ router.post('/login', function(req, res, next) {
 
             //Compare to stored hash
             if (hash == user.password) {
-                //Check if subscription has expired
-                if(moment(user.subscription).isAfter(moment()) || user.admin){
-                    SessionService.generateSession(user._id, "user", function(token){
-                        //All good, give the user their token
-                        res.status(200).json({
-                            token: token,
-                            subscription: user.subscription,
-                            admin: user.admin
-                        });
-                    }, function(err){
-                        res.status(err.status).json(err);
+                SessionService.generateSession(user._id, "user", function(token){
+                    //All good, give the user their token
+                    res.status(200).json({
+                        token: token,
+                        subscription: user.subscription,
+                        admin: user.admin
                     });
-                } else {
-                    res.status(402).json({
-                        msg: "Subscription expired!",
-                        subscription: user.subscription
-                    });
-                }
+                }, function(err){
+                    res.status(err.status).json(err);
+                });
             } else {
                 res.status(401).json({
                     msg: "Password is incorrect!"
