@@ -19,13 +19,14 @@ angular.module('kondeoHomeApp')
 
     $scope.login = function(){
       var payload = {
-        email: $scope.password,
+        email: $scope.email,
         password: $scope.password
       }
       User.login(payload, function(data){
-
+        localStorage.setItem("token", data.token);
+        $scope.loggedIn = true;
       }, function(err){
-
+        $scope.error = "Username/Password Incorrect";
       });
     }
   });
