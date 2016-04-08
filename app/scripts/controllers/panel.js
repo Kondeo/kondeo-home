@@ -8,7 +8,7 @@
  * Controller of the kondeoHomeApp
  */
 angular.module('kondeoHomeApp')
-  .controller('PanelCtrl', function ($scope) {
+  .controller('PanelCtrl', function ($scope, User) {
     $scope.awesomeThings = [
       'HTML5 Boilerplate',
       'AngularJS',
