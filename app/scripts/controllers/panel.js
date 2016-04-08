@@ -16,15 +16,40 @@ angular.module('kondeoHomeApp')
     ];
 
     $scope.loggedIn = localStorage.getItem("token") || false;
-    $scope.payload = {}
+    $scope.payloads = {
+      login: {},
+      update: {}
+    }
 
     $scope.login = function(){
-      User.login($scope.payload, function(data){
-        localStorage.setItem("token", data.token);
-        $scope.payload = {}
-        $scope.loggedIn = true;
+      User.login($scope.payloads.login, function(data){
+        $scope.error = null;
+        if(data.requireNewPassword){
+          $scope.payloads.update.token = data.token;
+          $scope.newPassword = true;
+        } else {
+          localStorage.setItem("token", data.token);
+          $scope.loggedIn = true;
+        }
       }, function(err){
         $scope.error = "Username/Password Incorrect";
+      });
+    }
+
+    $scope.updateUser = function(){
+      if($scope.payloads.update.password && $scope.payloads.update.password !== $scope.payloads.update.confirmPassword){
+        $scope.error = "Passwords Do Not Match."
+        return false;
+      }
+
+      $scope.payloads.update.token = $scope.payloads.update.token || localStorage.getItem("token");
+      User.update($scope.payloads.update, function(data){
+        $scope.error = null;
+        localStorage.setItem("token", $scope.payloads.update.token);
+        $scope.payloads.update = {}
+        $scope.loggedIn = true;
+      }, function(err){
+        $scope.error = "Something Went Wrong...";
       });
     }
   });
