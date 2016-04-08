@@ -16,14 +16,12 @@ angular.module('kondeoHomeApp')
     ];
 
     $scope.loggedIn = localStorage.getItem("token") || false;
+    $scope.payload = {}
 
     $scope.login = function(){
-      var payload = {
-        email: $scope.email,
-        password: $scope.password
-      }
-      User.login(payload, function(data){
+      User.login($scope.payload, function(data){
         localStorage.setItem("token", data.token);
+        $scope.payload = {}
         $scope.loggedIn = true;
       }, function(err){
         $scope.error = "Username/Password Incorrect";
