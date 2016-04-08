@@ -2,6 +2,6 @@
   <h2 class="auth-header">Login</h2>
   <input type="text" class="auth-input" ng-model="$parent.$parent.payload.email" placeholder="Email..." /><br />
   <input type="password" class="auth-input" ng-model="$parent.$parent.payload.password" placeholder="Password..." /><br />
-  <button class="auth-button" g-click="login()"><span class="glyphicon glyphicon-menu-right"></span></button>
+  <button class="auth-button" ng-click="login()"><span class="glyphicon glyphicon-menu-right"></span></button>
   <div class="auth-error" ng-if="error">{{error}}</div>
 </form>
