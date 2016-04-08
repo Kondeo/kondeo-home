@@ -5,6 +5,10 @@ var Project = new mongoose.Schema({
       type: String,
       require: 'Please provide the id of the account'
     },
+    title: {
+      type: String,
+      require: 'Please provide the title of the Project'
+    },
     created: {
       type: Date,
       default: Date.now
