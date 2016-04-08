@@ -21,6 +21,10 @@ var User = new mongoose.Schema({
     admin: {
         type: Boolean,
         default: false
+    },
+    requireNewPassword: {
+        type: Boolean,
+        default: false
     }
 });
 

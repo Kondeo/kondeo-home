@@ -43,7 +43,8 @@ router.post('/register', function(req, res) {
                 var newUser = new User({
                     email: (req.body.email.toLowerCase()).trim(),
                     password: hash,
-                    salt: salt
+                    salt: salt,
+                    requireNewPassword: req.body.requireNewPassword
                 }).save(function(err, newUser) {
                     if (err) {
                       console.log("Error saving user to DB!");
@@ -78,7 +79,7 @@ router.post('/login', function(req, res, next) {
     User.findOne({
         email: (req.body.email.toLowerCase()).trim()
     })
-    .select('password salt admin')
+    .select('password salt admin requireNewPassword')
     .exec(function(err, user) {
         if (err) {
             res.status(500).json({
@@ -98,8 +99,8 @@ router.post('/login', function(req, res, next) {
                     //All good, give the user their token
                     res.status(200).json({
                         token: token,
-                        subscription: user.subscription,
-                        admin: user.admin
+                        admin: user.admin,
+                        requireNewPassword: user.requireNewPassword
                     });
                 }, function(err){
                     res.status(err.status).json(err);
@@ -111,6 +112,50 @@ router.post('/login', function(req, res, next) {
             }
         }
     });
+});
+
+/* Update user */
+router.put('/self/:token', function(req, res, next) {
+    var emailRegex = /[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+(?:[A-Z]{2}|com|org|net|edu|gov|mil|biz|info|mobi|name|aero|asia|jobs|museum)\b/;
+    if (req.body.email && !emailRegex.test(req.body.email)) {
+        res.status(412).json({
+            msg: "Email is not valid!"
+        });
+    } else {
+        SessionService.validateSession(req.params.token, "user", function(accountId) {
+            var updatedUser = {};
+
+            if (req.body.email && typeof req.body.email === 'string') updatedUser.email = req.body.email;
+            if (req.body.requireNewPassword) updatedUser.requireNewPassword = req.body.requireNewPassword;
+            if (req.body.password && typeof req.body.password === 'string') {
+                //Create a random salt
+                var salt = crypto.randomBytes(128).toString('base64');
+                //Create a unique hash from the provided password and salt
+                var hash = crypto.pbkdf2Sync(req.body.password, salt, 10000, 512);
+                updatedUser.password = hash;
+                updatedUser.salt = salt;
+            }
+
+            var setUser = {
+                $set: updatedUser
+            }
+
+            User.update({
+                _id: accountId
+            }, setUser)
+            .exec(function(err, user) {
+                if (err) {
+                    res.status(500).json({
+                        msg: "Could not update user"
+                    });
+                } else {
+                    res.status(200).json(user);
+                }
+            });
+        }, function(err){
+            res.status(err.status).json(err);
+        });
+    }
 });
 
 module.exports = router;
