@@ -17,14 +17,14 @@ angular.module('kondeoHomeApp')
 
             update: {
                 method: 'PUT',
-                params: { token: 'token'},
+                params: { token: '@token'},
                 url: window.location.protocol + "//" + window.location.hostname + ":3000/" + 'users/self/:token',
                 isArray: false
             },
 
             get: {
                 method: 'GET',
-                params: { token: 'token'},
+                params: { token: '@token'},
                 url: window.location.protocol + "//" + window.location.hostname + ":3000/" + 'users/self/:token'
             }
 

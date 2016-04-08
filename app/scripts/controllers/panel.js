@@ -26,6 +26,7 @@ angular.module('kondeoHomeApp')
         $scope.error = null;
         if(data.requireNewPassword){
           $scope.payloads.update.token = data.token;
+          $scope.payloads.update.requireNewPassword = false;
           $scope.newPassword = true;
         } else {
           localStorage.setItem("token", data.token);
@@ -43,6 +44,7 @@ angular.module('kondeoHomeApp')
       }
 
       $scope.payloads.update.token = $scope.payloads.update.token || localStorage.getItem("token");
+      console.log($scope.payloads.update.token)
       User.update($scope.payloads.update, function(data){
         $scope.error = null;
         localStorage.setItem("token", $scope.payloads.update.token);
