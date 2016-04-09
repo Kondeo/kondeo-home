@@ -74,7 +74,7 @@ router.post('/', function(req, res, next) {
                 if(err){
                     res.status(500).send("There was an error");
                 } if(!invoicedUser){
-                    res.status(409).send("Invoiced user does not exist!");
+                    res.status(404).send("Invoiced user does not exist!");
                 } else {
                     createInvoice(user);
                 }
@@ -83,11 +83,6 @@ router.post('/', function(req, res, next) {
     }
 
     function createInvoice(user){
-      if(!user.admin){
-          res.status(401).json({
-              msg: "Not an admin!"
-          });
-      } else {
         new Invoice({
             accountId: req.query.accountId,
             paid: req.query.paid,
@@ -103,7 +98,6 @@ router.post('/', function(req, res, next) {
                 res.status(201).send(invoice);
             }
         });
-      }
     }
 });
 
