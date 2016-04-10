@@ -101,6 +101,7 @@ router.post('/', function(req, res, next) {
     }
 });
 
+//INCOMPLETE
 router.put('/:id', function(req, res, next) {
     if(!(req.body.token)){
         return res.status(412).json({
@@ -151,6 +152,7 @@ router.put('/:id', function(req, res, next) {
     }
 });
 
+//INCOMPLETE
 router.put('/:id/report', function(req, res, next) {
     if(!(req.body.token)){
         return res.status(412).json({
