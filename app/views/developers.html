@@ -1,0 +1,8 @@
+<div ng-if="developer == 'developers'">
+  <h3>About Our Development Team</h3><br />
+  Kondeo relies on it's awesome team of developers to build amazing software for you.<br />
+  Click on any developer below to learn more about them individually.<br />
+  - <a ng-href="#/about/julianp"><strong>Julian Poyourow</strong></a><br />
+  - <a ng-href="#/about/aaront"><strong>Aaron Turner</strong></a><br />
+</div>
+<div ng-if="developer != 'developers'" ng-include="developerURL"></div>

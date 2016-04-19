@@ -2,14 +2,14 @@
 
 /**
  * @ngdoc function
- * @name kondeoHomeApp.controller:AboutdevelopersCtrl
+ * @name kondeoHomeApp.controller:ContactCtrl
  * @description
- * # AboutdevelopersCtrl
+ * # ContactCtrl
  * Controller of the kondeoHomeApp
  */
 angular.module('kondeoHomeApp')
-  .controller('AboutdevelopersCtrl', function () {
-    this.awesomeThings = [
+  .controller('ContractCtrl', function ($scope) {
+    $scope.awesomeThings = [
       'HTML5 Boilerplate',
       'AngularJS',
       'Karma'

@@ -1,0 +1,16 @@
+<form ng-if="!newPassword" class="auth-form">
+  <h2 class="auth-header">Login</h2>
+  <input type="text" class="auth-input" ng-model="$parent.$parent.payloads.login.email" placeholder="Email..." /><br />
+  <input type="password" class="auth-input" ng-model="$parent.$parent.payloads.login.password" placeholder="Password..." /><br />
+  <button class="auth-button" ng-click="login()"><span class="glyphicon glyphicon-menu-right"></span></button>
+  <div class="auth-error" ng-if="error">{{error}}</div>
+</form>
+
+<form ng-if="newPassword" class="auth-form">
+  <h2 class="auth-header">New Password</h2><br />
+  Please create a new password for security.
+  <input type="password" class="auth-input" ng-model="$parent.$parent.payloads.update.password" placeholder="New Password..." /><br />
+  <input type="password" class="auth-input" ng-model="$parent.$parent.payloads.update.confirmPassword" placeholder="Confirm Password..." /><br />
+  <button class="auth-button" ng-click="updateUser()"><span class="glyphicon glyphicon-menu-right"></span></button>
+  <div class="auth-error" ng-if="error">{{error}}</div>
+</form>
