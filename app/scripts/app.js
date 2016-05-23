@@ -43,6 +43,9 @@ angular
         templateUrl: 'views/panel/contract.html',
         controller: 'ContractCtrl'
       })
+      .when('/contract', {
+        templateUrl: 'views/staticContract.html',
+      })
       .when('/about/:developer', {
         templateUrl: 'views/developers.html',
         controller: 'DevelopersCtrl',
