@@ -56,6 +56,10 @@ a:visited {
   text-align: center;
 }
 
+.auth-form-dark {
+    background-color: #3D4658;
+}
+
 .auth-input {
   background-color: rgba(98,98,98,0.3);
   border: 1px solid rgba(98,98,98,0.65);
@@ -119,6 +123,20 @@ a:visited {
 
 .panel-dash-right {
   left: calc(50% + 5px);
+}
+
+.panel-admin-overlay {
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    background-color: rgba(127, 140, 141,1.0);
+    z-index: 5;
+}
+
+.panel-admin-overlay-form {
+    margin-top: 150px;
 }
 
 @media screen and (max-width: 600px) {

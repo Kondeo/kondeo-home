@@ -1,6 +1,6 @@
 'use strict';
 
-var API_BASE = "http://immense-canary-0287.vagrantshare.com/";
+var API_BASE = "http://demanding-porpoise-1391.vagrantshare.com/";
 
 /**
  * @ngdoc overview

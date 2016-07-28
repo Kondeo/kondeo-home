@@ -27,3 +27,18 @@
     </div>
   </div>
 </div>
+
+<div ng-if="overlay.invoice" class="panel-admin-overlay">
+    <form class="auth-form auth-form-dark panel-admin-overlay-form">
+      <h2 class="auth-header">Invoice Information</h2><br />
+      <input type="text" class="auth-input" ng-model="overlay.invoice.total" placeholder="Invoice Total" /><br />
+      <input type="date" class="auth-input" ng-model="overlay.invoice.due" placeholder="Due On" /><br />
+      User:
+      <select ng-model="overlay.invoice.email">
+        <option ng-repeat="user in users" ng-if="!user.admin" value="{{user.email}}">{{user.email}}</option>
+      </select>
+
+      <button class="auth-button" ng-click="saveInvoice()"><span class="glyphicon glyphicon-menu-right"></span></button>
+      <div class="auth-error" ng-if="error">{{error}}</div>
+    </form>
+</div>

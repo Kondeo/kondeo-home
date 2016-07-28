@@ -15,7 +15,8 @@ angular.module('kondeoHomeApp')
 
     $scope.invoices = {};
     $scope.users = [];
-    $scope.invoice = {};
+    $scope.overlay = {};
+    $scope.overlay.invoice = {};
 
     Invoice.getAll({
         token: token
@@ -40,25 +41,43 @@ angular.module('kondeoHomeApp')
     User.getAll({
         token: token
     }, function(res){
-        console.log(res)
         $scope.users = res;
     }, function(err){
         console.log(err)
         alert("An error occurred")
     });
 
-    $scope.addInvoice = function(){
-        var payload = {
-            paid: $scope.invoice.paid,
-            accountId: $scope.invoice.accountId,
-            total: $scope.invoice.total,
-            due: $scope.invoice.due
+    $scope.saveInvoice = function(){
+        var userId = null;
+        for(var i=0;i<$scope.users.length;i++){
+            if($scope.users[i].email == $scope.overlay.invoice.email){
+                userId = $scope.users[i]._id;
+                break;
+            }
         }
-        Invoice.create(payload, function(res){
-            $scope.invoice = {};
-        }, function(err){
-            console.log(err)
-            alert("An error occurred")
-        });
+        var payload = {
+            paid: $scope.overlay.invoice.paid || false,
+            accountId: userId,
+            total: $scope.overlay.invoice.total,
+            due: $scope.overlay.invoice.due,
+            token: token
+        }
+        if($scope.overlay.invoice._id){
+            payload.id = $scope.overlay.invoice._id;
+            Invoice.update(payload, function(res){
+                alert("Saved!")
+            }, function(err){
+                console.log(err)
+                alert("An error occurred")
+            });
+        } else {
+            Invoice.create(payload, function(res){
+                alert("Saved!")
+            }, function(err){
+                console.log(err)
+                alert("An error occurred")
+            });
+        }
+        $scope.overlay.invoice = null;
     }
   });

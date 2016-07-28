@@ -69,9 +69,9 @@ router.get('/self', function(req, res, next) {
 });
 
 router.post('/', function(req, res, next) {
-    if(!(req.query.token
-      && req.query.accountId
-      && req.query.total)){
+    if(!(req.body.token
+      && req.body.accountId
+      && req.body.total)){
         return res.status(412).json({
             msg: "Route requisites not met."
         });
@@ -86,7 +86,7 @@ router.post('/', function(req, res, next) {
             });
         } else {
             User.findOne({
-                _id: req.query.accountId
+                _id: req.body.accountId
             }).lean().select().exec(function(err, invoicedUser){
                 if(err){
                     res.status(500).send("There was an error");
@@ -101,10 +101,10 @@ router.post('/', function(req, res, next) {
 
     function createInvoice(user){
         new Invoice({
-            accountId: req.query.accountId,
-            paid: req.query.paid,
-            total: parseInt(req.query.total),
-            due: req.query.due
+            accountId: req.body.accountId,
+            paid: req.body.paid,
+            total: parseInt(req.body.total),
+            due: req.body.due
         }).save(function(err, invoice) {
             if (err) {
                 console.log("Error saving invoice to DB!");
