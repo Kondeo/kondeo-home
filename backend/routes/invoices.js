@@ -6,7 +6,7 @@ var Invoice = mongoose.model('Invoice');
 var User = mongoose.model('User');
 var SessionService = require('../services/sessions.js');
 
-/* GET invoices for self. */
+/* GET all invoices. */
 router.get('/', function(req, res, next) {
     validateUser(req, res, "admin", displayInvoices);
 
@@ -190,3 +190,5 @@ function validateUser(req, res, type, success){
         res.status(err.status).json(err);
     });
 }
+
+module.exports = router;

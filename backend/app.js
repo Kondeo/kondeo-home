@@ -9,11 +9,13 @@ var bodyParser = require('body-parser');
 var mongo = require('mongodb');
 var db = require('./models/db');
 var users = require('./models/users');
+var invoices = require('./models/invoices');
 var sessions = require('./models/sessions');
 
 //Routes
 var routes = require('./routes/index');
 var users = require('./routes/users');
+var invoices = require('./routes/invoices');
 
 var app = express();
 
@@ -34,6 +36,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/', routes);
 app.use('/users', users);
+app.use('/invoices', invoices);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

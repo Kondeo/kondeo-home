@@ -4,12 +4,12 @@ angular.module('kondeoHomeApp')
     return $resource(API_BASE + 'invoices',
         { }, {
             create: {
-                method: 'POST',
-                isArray: false
+                method: 'POST'
             },
 
             getAll: {
-                method: 'GET'
+                method: 'GET',
+                isArray: true
             },
 
             get: {
