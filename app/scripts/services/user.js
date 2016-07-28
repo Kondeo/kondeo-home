@@ -1,7 +1,7 @@
 angular.module('kondeoHomeApp')
   .factory('User', ['$resource', function($resource) {
 
-    return $resource(window.location.protocol + "//" + window.location.hostname + ":3000/" + 'users/:Id',
+    return $resource(API_BASE + 'users/:Id',
         { Id: '@Id' }, {
             register: {
                 method: 'POST',
@@ -18,14 +18,14 @@ angular.module('kondeoHomeApp')
             update: {
                 method: 'PUT',
                 params: { token: '@token'},
-                url: window.location.protocol + "//" + window.location.hostname + ":3000/" + 'users/self/:token',
+                url: API_BASE + 'users/self/:token',
                 isArray: false
             },
 
             get: {
                 method: 'GET',
                 params: { token: '@token'},
-                url: window.location.protocol + "//" + window.location.hostname + ":3000/" + 'users/self/:token'
+                url: API_BASE + 'users/self/:token'
             }
 
         } );

@@ -1,5 +1,7 @@
 'use strict';
 
+var API_BASE = "http://localhost:3000/";
+
 /**
  * @ngdoc overview
  * @name kondeoHomeApp

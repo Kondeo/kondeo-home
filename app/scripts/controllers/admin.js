@@ -8,8 +8,24 @@
  * Controller of the kondeoHomeApp
  */
 angular.module('kondeoHomeApp')
-  .controller('AdminCtrl', function ($scope, $location, User) {
-    var loggedIn = localStorage.getItem("token") || false;
+  .controller('AdminCtrl', function ($scope, $location, User, Invoice) {
+    var token = localStorage.getItem("token") || false;
     var admin = localStorage.getItem("admin") || false;
-    if(!loggedIn || !admin) $location.path('panel');
+    if(!token || !admin) $location.path('panel');
+
+    Invoice.getAll({
+        token: token
+    }, function(res){
+        console.log(res)
+    }, function(err){
+        console.log(err)
+    });
+
+    $scope.addInvoice = function(){
+        Invoice.create(payload, function(res){
+
+        }, function(err){
+
+        });
+    }
   });

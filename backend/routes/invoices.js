@@ -6,6 +6,23 @@ var Invoice = mongoose.model('Invoice');
 var User = mongoose.model('User');
 var SessionService = require('../services/sessions.js');
 
+/* GET invoices for self. */
+router.get('/', function(req, res, next) {
+    validateUser(req, res, "admin", displayInvoices);
+
+    function displayInvoices(){
+        Invoice.find().lean().select().exec(function(err, invoices){
+            if(err){
+                res.status(500).send("There was an error");
+            } if(!invoices){
+                res.status(404).send("Invoices Not Found!");
+            } else {
+                res.status(200).json(invoices);
+            }
+        });
+    }
+});
+
 /* GET invoice. */
 router.get('/:id', function(req, res, next) {
     if(!(req.query.token)){
@@ -14,7 +31,7 @@ router.get('/:id', function(req, res, next) {
         });
     }
 
-    validateUser(req, res, displayInvoice);
+    validateUser(req, res, "user", displayInvoice);
 
     function displayInvoice(user){
         Invoice.findOne({
@@ -34,7 +51,7 @@ router.get('/:id', function(req, res, next) {
 
 /* GET invoices for self. */
 router.get('/self/:token', function(req, res, next) {
-    validateUser(req, res, displayInvoice);
+    validateUser(req, res, "user", displayInvoice);
 
     function displayInvoice(user){
         Invoice.find({
@@ -60,7 +77,7 @@ router.post('/', function(req, res, next) {
         });
     }
 
-    validateUser(req, res, checkInvoicedUser);
+    validateUser(req, res, "admin", checkInvoicedUser);
 
     function checkInvoicedUser(user){
         if(!user.admin){
@@ -151,9 +168,9 @@ router.put('/:id', function(req, res, next) {
     }
 });
 
-function validateUser(req, res, success){
+function validateUser(req, res, type, success){
     var token = req.params.token || req.body.token || req.query.token;
-    SessionService.validateSession(token, "user", function(accountId) {
+    SessionService.validateSession(token, type, function(accountId) {
         User.findById(accountId)
         .select('name email subscription admin')
         .exec(function(err, user) {
