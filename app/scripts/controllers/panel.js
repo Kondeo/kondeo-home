@@ -8,7 +8,7 @@
  * Controller of the kondeoHomeApp
  */
 angular.module('kondeoHomeApp')
-  .controller('PanelCtrl', function ($scope, User) {
+  .controller('PanelCtrl', function ($scope, $location, User) {
     $scope.awesomeThings = [
       'HTML5 Boilerplate',
       'AngularJS',
@@ -16,6 +16,9 @@ angular.module('kondeoHomeApp')
     ];
 
     $scope.loggedIn = localStorage.getItem("token") || false;
+    var admin = localStorage.getItem("admin") || false;
+    if($scope.loggedIn && admin) $location.path("panel/admin");
+
     $scope.payloads = {
       login: {},
       update: {}
@@ -24,6 +27,10 @@ angular.module('kondeoHomeApp')
     $scope.login = function(){
       User.login($scope.payloads.login, function(data){
         $scope.error = null;
+        if(data.admin) {
+            admin = true;
+            localStorage.setItem("admin", true);
+        }
         if(data.requireNewPassword){
           $scope.payloads.update.token = data.token;
           $scope.payloads.update.requireNewPassword = false;
@@ -31,6 +38,7 @@ angular.module('kondeoHomeApp')
         } else {
           localStorage.setItem("token", data.token);
           $scope.loggedIn = true;
+          if(admin) $location.path("panel/admin");
         }
       }, function(err){
         $scope.error = "Username/Password Incorrect";
@@ -50,6 +58,7 @@ angular.module('kondeoHomeApp')
         localStorage.setItem("token", $scope.payloads.update.token);
         $scope.payloads.update = {}
         $scope.loggedIn = true;
+        if(admin) $location.path("panel/admin");
       }, function(err){
         $scope.error = "Something Went Wrong...";
       });

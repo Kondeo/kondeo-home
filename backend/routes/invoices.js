@@ -50,7 +50,7 @@ router.get('/:id', function(req, res, next) {
 });
 
 /* GET invoices for self. */
-router.get('/self/:token', function(req, res, next) {
+router.get('/self', function(req, res, next) {
     validateUser(req, res, "user", displayInvoice);
 
     function displayInvoice(user){

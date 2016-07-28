@@ -26,6 +26,11 @@ angular.module('kondeoHomeApp')
                 method: 'GET',
                 params: { token: '@token'},
                 url: API_BASE + 'users/self/:token'
+            },
+
+            getAll: {
+                method: 'GET',
+                url: API_BASE + 'users'
             }
 
         } );

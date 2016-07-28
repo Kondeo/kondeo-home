@@ -1,6 +1,6 @@
 'use strict';
 
-var API_BASE = "http://localhost:3000/";
+var API_BASE = "http://immense-canary-0287.vagrantshare.com/";
 
 /**
  * @ngdoc overview

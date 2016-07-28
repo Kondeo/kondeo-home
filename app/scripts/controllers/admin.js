@@ -13,19 +13,42 @@ angular.module('kondeoHomeApp')
     var admin = localStorage.getItem("admin") || false;
     if(!token || !admin) $location.path('panel');
 
+    $scope.invoices = [];
+    $scope.users = [];
+    $scope.invoice = {};
+
     Invoice.getAll({
         token: token
     }, function(res){
         console.log(res)
+        $scope.invoices = res;
     }, function(err){
         console.log(err)
+        alert("An error occurred")
+    });
+
+    User.getAll({
+        token: token
+    }, function(res){
+        console.log(res)
+        $scope.users = res;
+    }, function(err){
+        console.log(err)
+        alert("An error occurred")
     });
 
     $scope.addInvoice = function(){
+        var payload = {
+            paid: $scope.invoice.paid,
+            accountId: $scope.invoice.accountId,
+            total: $scope.invoice.total,
+            due: $scope.invoice.due
+        }
         Invoice.create(payload, function(res){
-
+            $scope.invoice = {};
         }, function(err){
-
+            console.log(err)
+            alert("An error occurred")
         });
     }
   });
