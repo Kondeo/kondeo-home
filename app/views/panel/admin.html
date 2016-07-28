@@ -36,7 +36,9 @@
       User:
       <select ng-model="overlay.invoice.email">
         <option ng-repeat="user in users" ng-if="!user.admin" value="{{user.email}}">{{user.email}}</option>
-      </select>
+      </select><br />
+
+      <input type="checkbox" ng-model="overlay.invoice.paid"> Invoice has been paid<br />
 
       <button class="auth-button" ng-click="saveInvoice()"><span class="glyphicon glyphicon-menu-right"></span></button>
       <div class="auth-error" ng-if="error">{{error}}</div>
