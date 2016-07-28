@@ -5,21 +5,18 @@ angular.module('kondeoHomeApp')
         { Id: '@Id' }, {
             register: {
                 method: 'POST',
-                params: { Id: 'register' },
-                isArray: false
+                params: { Id: 'register' }
             },
 
             login: {
                 method: 'POST',
-                params: { Id: 'login' },
-                isArray: false
+                params: { Id: 'login' }
             },
 
             update: {
                 method: 'PUT',
                 params: { token: '@token'},
-                url: API_BASE + 'users/self/:token',
-                isArray: false
+                url: API_BASE + 'users/self/:token'
             },
 
             get: {
@@ -30,7 +27,8 @@ angular.module('kondeoHomeApp')
 
             getAll: {
                 method: 'GET',
-                url: API_BASE + 'users'
+                url: API_BASE + 'users',
+                isArray: true
             }
 
         } );

@@ -7,7 +7,17 @@ var express = require('express'),
 
 /* GET users listing. */
 router.get('/', function(req, res, next) {
-  res.status(404).send('Route Not Enabled');
+    validateUser(req, res, "admin", getUsers);
+
+    function getUsers(user){
+        User.find().lean().select().exec(function(err, users){
+            if(err){
+                res.status(500).send("There was an error");
+            } else {
+                res.status(200).json(users);
+            }
+        });
+    }
 });
 
 router.post('/register', function(req, res) {
@@ -95,7 +105,8 @@ router.post('/login', function(req, res, next) {
 
             //Compare to stored hash
             if (hash == user.password) {
-                SessionService.generateSession(user._id, "user", function(token){
+                var type = user.admin ? "admin" : "user";
+                SessionService.generateSession(user._id, type, function(token){
                     //All good, give the user their token
                     res.status(200).json({
                         token: token,
@@ -157,5 +168,28 @@ router.put('/self/:token', function(req, res, next) {
         });
     }
 });
+
+function validateUser(req, res, type, success){
+    var token = req.params.token || req.body.token || req.query.token;
+    SessionService.validateSession(token, type, function(accountId) {
+        User.findById(accountId)
+        .select('name email subscription admin')
+        .exec(function(err, user) {
+            if (err) {
+                res.status(500).json({
+                    msg: "Couldn't search the database for user!"
+                });
+            } else if (!user) {
+                res.status(401).json({
+                    msg: "User not found, user table out of sync with session table!"
+                });
+            } else {
+                success(user);
+            }
+        });
+    }, function(err){
+        res.status(err.status).json(err);
+    });
+}
 
 module.exports = router;

@@ -1,5 +1,5 @@
 angular.module('kondeoHomeApp')
-  .factory('User', ['$resource', function($resource) {
+  .factory('Invoice', ['$resource', function($resource) {
 
     return $resource(API_BASE + 'invoices',
         { }, {
