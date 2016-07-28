@@ -39,6 +39,10 @@ angular
         templateUrl: 'views/panel/panel.html',
         controller: 'PanelCtrl'
       })
+      .when('/panel/admin', {
+        templateUrl: 'views/panel/admin.html',
+        controller: 'AdminCtrl'
+      })
       .when('/panel/contract', {
         templateUrl: 'views/panel/contract.html',
         controller: 'ContractCtrl'
