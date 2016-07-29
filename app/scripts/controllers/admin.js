@@ -11,14 +11,17 @@ angular.module('kondeoHomeApp')
   .controller('AdminCtrl', function ($scope, $location, User, Invoice) {
     var token = localStorage.getItem("token") || false;
     var admin = localStorage.getItem("admin") || false;
-    if(!token || !admin) $location.path('panel');
 
     $scope.invoices = {};
     $scope.users = [];
     $scope.overlay = {};
 
-    loadInvoices();
-    loadUsers();
+    if(!token || !admin) {
+        $location.path('panel');
+    } else {
+        loadInvoices();
+        loadUsers();
+    }
 
     function loadInvoices(){
         Invoice.getAll({
