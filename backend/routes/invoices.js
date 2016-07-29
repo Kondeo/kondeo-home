@@ -11,7 +11,7 @@ router.get('/', function(req, res, next) {
     validateUser(req, res, "admin", displayInvoices);
 
     function displayInvoices(){
-        Invoice.find().lean().select().exec(function(err, invoices){
+        Invoice.find().populate('user').exec(function(err, invoices){
             if(err){
                 res.status(500).send("There was an error");
             } if(!invoices){
@@ -36,7 +36,7 @@ router.get('/:id', function(req, res, next) {
     function displayInvoice(user){
         Invoice.findOne({
             _id: parseInt(req.params.id),
-            accountId: user._id
+            user: user._id
         }).lean().select().exec(function(err, invoice){
             if(err){
                 res.status(500).send("There was an error");
@@ -55,7 +55,7 @@ router.get('/self', function(req, res, next) {
 
     function displayInvoice(user){
         Invoice.find({
-            accountId: user._id
+            user: user._id
         }).lean().select().exec(function(err, invoices){
             if(err){
                 res.status(500).send("There was an error");
@@ -101,7 +101,7 @@ router.post('/', function(req, res, next) {
 
     function createInvoice(user){
         new Invoice({
-            accountId: req.body.accountId,
+            user: req.body.accountId,
             paid: req.body.paid,
             total: parseInt(req.body.total),
             due: req.body.due

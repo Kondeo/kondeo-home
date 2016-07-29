@@ -1,8 +1,9 @@
 var mongoose = require('mongoose'),
   moment = require('moment');
 var Invoice = new mongoose.Schema({
-    accountId: {
+    user: {
         type: String,
+        ref: 'User',
         require: 'Please provide the id of the account'
     },
     paid: {

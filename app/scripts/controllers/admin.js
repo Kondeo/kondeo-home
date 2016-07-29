@@ -53,8 +53,12 @@ angular.module('kondeoHomeApp')
         });
     }
 
-    $scope.showInvoiceOverlay = function(){
-        $scope.overlay.invoice = {};
+    $scope.showInvoiceOverlay = function(invoice){
+        if(invoice){
+            invoice.due = new Date(invoice.due);
+            invoice.email = invoice.user.email;
+        }
+        $scope.overlay.invoice = invoice || {};
     }
 
     $scope.hideInvoiceOverlay = function(){

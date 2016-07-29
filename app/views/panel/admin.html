@@ -1,16 +1,16 @@
 <h2 class="panel-header">Dashboard</h2>
 <div class="panel-dash-container">
   <div class="panel-dash panel-dash-left">
-    <h3 class="panel-dash-header">Invoices <a ng-click="showInvoiceOverlay()">+</a></h3>
+    <h3 class="panel-dash-header">Invoices <a class="pointer" ng-click="showInvoiceOverlay()">+</a></h3>
     <div ng-if="!invoices">No invoices due, and no payment history.</div>
     <div ng-if="invoices.due"><b>- Due -</b></div>
     <div ng-if="invoices.due" ng-repeat="invoice in invoices.due">
-      {{invoice.total}}
+      {{invoice.total}} <a class="pointer" ng-click="showInvoiceOverlay(invoice)">></a>
     </div>
     <div ng-if="invoices.total">Total Due: {{invoices.total}}</div>
     <div ng-if="invoices.history"><b>- Paid -</b></div>
     <div ng-if="invoices.history" ng-repeat="invoice in invoices.history">
-      {{invoice.total}}
+      {{invoice.total}} <a class="pointer" ng-click="showInvoiceOverlay(invoice)">></a>
     </div>
   </div>
 
@@ -30,7 +30,7 @@
 
 <div ng-if="overlay.invoice" class="panel-admin-overlay">
     <form class="auth-form auth-form-dark panel-admin-overlay-form">
-      <a ng-click="hideInvoiceOverlay()">Close</a>
+      <a class="pointer" ng-click="hideInvoiceOverlay()">Close</a>
       <h2 class="auth-header">Invoice Information</h2><br />
       <input type="text" class="auth-input" ng-model="overlay.invoice.total" placeholder="Invoice Total" /><br />
       <input type="date" class="auth-input" ng-model="overlay.invoice.due" placeholder="Due On" /><br />
