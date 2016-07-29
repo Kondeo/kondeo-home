@@ -16,36 +16,50 @@ angular.module('kondeoHomeApp')
     $scope.invoices = {};
     $scope.users = [];
     $scope.overlay = {};
-    $scope.overlay.invoice = {};
 
-    Invoice.getAll({
-        token: token
-    }, function(res){
-        var due = [];
-        var history = [];
-        for(var i=0;i<res.length;i++){
-            var invoice = res[i];
-            if(invoice.paid){
-                history.push(invoice);
-            } else {
-                due.push(invoice);
+    loadInvoices();
+    loadUsers();
+
+    function loadInvoices(){
+        Invoice.getAll({
+            token: token
+        }, function(res){
+            var due = [];
+            var history = [];
+            for(var i=0;i<res.length;i++){
+                var invoice = res[i];
+                if(invoice.paid){
+                    history.push(invoice);
+                } else {
+                    due.push(invoice);
+                }
             }
-        }
-        if(due.length > 0) $scope.invoices.due = due;
-        if(history.length > 0) $scope.invoices.history = history;
-    }, function(err){
-        console.log(err)
-        alert("An error occurred")
-    });
+            if(due.length > 0) $scope.invoices.due = due;
+            if(history.length > 0) $scope.invoices.history = history;
+        }, function(err){
+            console.log(err)
+            alert("An error occurred")
+        });
+    }
 
-    User.getAll({
-        token: token
-    }, function(res){
-        $scope.users = res;
-    }, function(err){
-        console.log(err)
-        alert("An error occurred")
-    });
+    function loadUsers(){
+        User.getAll({
+            token: token
+        }, function(res){
+            $scope.users = res;
+        }, function(err){
+            console.log(err)
+            alert("An error occurred")
+        });
+    }
+
+    $scope.showInvoiceOverlay = function(){
+        $scope.overlay.invoice = {};
+    }
+
+    $scope.hideInvoiceOverlay = function(){
+        $scope.overlay.invoice = null;
+    }
 
     $scope.saveInvoice = function(){
         var userId = null;
@@ -65,14 +79,14 @@ angular.module('kondeoHomeApp')
         if($scope.overlay.invoice._id){
             payload.id = $scope.overlay.invoice._id;
             Invoice.update(payload, function(res){
-                alert("Saved!")
+                loadInvoices();
             }, function(err){
                 console.log(err)
                 alert("An error occurred")
             });
         } else {
             Invoice.create(payload, function(res){
-                alert("Saved!")
+                loadInvoices();
             }, function(err){
                 console.log(err)
                 alert("An error occurred")
