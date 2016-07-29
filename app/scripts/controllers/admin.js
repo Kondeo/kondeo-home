@@ -34,6 +34,7 @@ angular.module('kondeoHomeApp')
                     due.push(invoice);
                 }
             }
+            $scope.invoices = {};
             if(due.length > 0) $scope.invoices.due = due;
             if(history.length > 0) $scope.invoices.history = history;
         }, function(err){

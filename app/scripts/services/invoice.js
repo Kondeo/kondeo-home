@@ -14,7 +14,13 @@ angular.module('kondeoHomeApp')
 
             get: {
                 method: 'GET',
-                url: API_BASE + 'self'
+                url: API_BASE + 'invoices/self'
+            },
+
+            update: {
+                method: 'PUT',
+                params: { id: "@id" },
+                url: API_BASE + 'invoices/:id'
             }
 
         } );

@@ -125,7 +125,7 @@ router.put('/:id', function(req, res, next) {
         });
     }
 
-    validateUser(req, res, updateInvoice);
+    validateUser(req, res, "admin", updateInvoice);
 
     function updateInvoice(user){
         if(!user.admin){
@@ -142,16 +142,18 @@ router.put('/:id', function(req, res, next) {
               }
             };
 
-            if (req.body.paid && typeof req.body.paid === 'boolean') updatedInvoice.$set.paid = req.body.paid;
-            if (req.body.total && typeof req.body.total === 'number') updatedInvoice.$set.total = req.body.total;
-            if (req.body.due && typeof req.body.due === 'string') updatedInvoice.$set.due = req.body.due;
+            if (typeof req.body.paid == "boolean") updatedInvoice.$set.paid = req.body.paid;
+            if (req.body.total) updatedInvoice.$set.total = req.body.total;
+            if (req.body.due) updatedInvoice.$set.due = req.body.due;
 
-            for(var i = 0; i < req.body.documents.length; i++){
-              updatedInvoice.$push.documents.$each.push({
-                title: req.body.documents[i].title,
-                description: req.body.documents[i].description,
-                url: req.body.documents[i].url,
-              })
+            if(req.body.documents){
+                for(var i = 0; i < req.body.documents.length; i++){
+                  updatedInvoice.$push.documents.$each.push({
+                    title: req.body.documents[i].title,
+                    description: req.body.documents[i].description,
+                    url: req.body.documents[i].url,
+                  })
+                }
             }
 
             Invoice.update({
