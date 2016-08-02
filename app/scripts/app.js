@@ -1,6 +1,6 @@
 'use strict';
 
-var API_BASE = "http://demanding-porpoise-1391.vagrantshare.com/";
+var API_BASE = "http://localhost:3000/";
 
 /**
  * @ngdoc overview
@@ -40,6 +40,10 @@ angular
       .when('/panel', {
         templateUrl: 'views/panel/panel.html',
         controller: 'PanelCtrl'
+      })
+      .when('/panel/auth', {
+        templateUrl: 'views/panel/auth.html',
+        controller: 'AuthCtrl'
       })
       .when('/panel/admin', {
         templateUrl: 'views/panel/admin.html',

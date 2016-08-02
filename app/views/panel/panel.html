@@ -1,3 +1,30 @@
-<div ng-if="!loggedIn" ng-include="'views/panel/part_auth.html'"></div>
+<h2 class="panel-header">Dashboard</h2>
+<a ng-click="logout()">Logout</a>
+<div class="panel-dash-container">
+  <div class="panel-dash panel-dash-left">
+    <h3 class="panel-dash-header">Invoices</h3>
+    <div ng-if="!invoices">No invoices due, and no payment history.</div>
+    <div ng-if="invoices.due">Due</div>
+    <div ng-if="invoices.due" ng-repeat="invoice in invoices.due">
+      {{invoice.total}}, due by {{invoice.due}} - <a ng-click="viewInvoice(invoice)">View and Pay</a>
+    </div>
+    <div ng-if="invoices.total">Total Due: {{invoices.total}}</div>
+    <div ng-if="invoices.history">Paid</div>
+    <div ng-if="invoices.history" ng-repeat="invoice in invoices.history">
+      {{invoice.total}} - <a ng-click="viewInvoice(invoice)">View</a>
+    </div>
+  </div>
 
-<div ng-if="loggedIn" ng-include="'views/panel/part_dash.html'"></div>
+  <div class="panel-dash panel-dash-right">
+    <h3 class="panel-dash-header">Projects</h3>
+    <div ng-if="!projects">No projects active or project history.</div>
+    <div ng-if="projects.active">Active</div>
+    <div ng-if="projects.active" ng-repeat="project in projects.active">
+      Project {{$index}}
+    </div>
+    <div ng-if="projects.history">History</div>
+    <div ng-if="projects.history" ng-repeat="project in projects.history">
+      Project {{$index}}
+    </div>
+  </div>
+</div>

@@ -41,8 +41,11 @@ angular.module('kondeoHomeApp')
             if(due.length > 0) $scope.invoices.due = due;
             if(history.length > 0) $scope.invoices.history = history;
         }, function(err){
-            console.log(err)
-            alert("An error occurred")
+            switch(err.status){
+                case 401:
+                    unauthorized();
+                    break;
+            }
         });
     }
 
@@ -52,9 +55,18 @@ angular.module('kondeoHomeApp')
         }, function(res){
             $scope.users = res;
         }, function(err){
-            console.log(err)
-            alert("An error occurred")
+            switch(err.status){
+                case 401:
+                    unauthorized();
+                    break;
+            }
         });
+    }
+
+    function unauthorized(){
+        localStorage.removeItem("token");
+        localStorage.removeItem("admin");
+        $location.path('panel');
     }
 
     $scope.showInvoiceOverlay = function(invoice){
