@@ -1,0 +1,132 @@
+@font-face {
+  font-family: kondeoHome;
+  src: url(palette_becker.ttf);
+}
+
+body {
+  text-align: center;
+  font-family: 'Roboto', sans-serif;
+  font-weight: 300;
+  line-height: 1.5;
+
+  animation: bounceIn 1s both ease-in;
+}
+
+a {
+  text-decoration: none;
+  color: rgb(0, 0, 238);
+}
+
+h1 {
+  font-size: 1.5rem;
+}
+
+h2 {
+  font-size: 1.3rem;
+}
+
+h3 {
+  font-size: 1rem;
+}
+
+.welcome {
+  margin-top: calc(50vh - 220px);
+  padding-bottom: 20vh;
+  padding-left: 20px;
+  padding-right: 20px;
+}
+
+.welcome h1 {
+  font-weight: 400;
+  color: #E44235;
+  font-size: 3.75rem;
+  font-family: kondeoHome;
+  margin: 0;
+}
+
+.welcome .subtitle {
+  font-weight: 400;
+  margin: 0;
+  margin-bottom: 40px;
+}
+
+.contact-button {
+  font-weight: 900;
+  color: white;
+  background-color: #3D4658;
+  padding: 10px;
+  border-radius: 8px;
+  font-size: 1.1rem;
+  line-height: 2rem;
+}
+
+.contact-button ion-icon {
+  vertical-align: middle;
+  color: white;
+}
+
+.description {
+  margin-top: 32px;
+}
+
+.projects-container {
+  margin-top: 150px;
+  margin-bottom: 50px;
+}
+
+.projects-container h2 {
+  margin-bottom: 40px;
+}
+
+.project {
+  margin-bottom: 50px;
+}
+
+.project img {
+  width: 350px;
+  max-width: 100%;
+  box-shadow: 1px 1px 7px #aaaaaa;
+}
+
+.project .links a:not(:last-child) {
+  margin-right: 40px;
+}
+
+.contact {
+  line-height: 1.8;
+}
+
+@keyframes bounceIn {
+  0% {
+    transform: translateY(-100%);
+    opacity: 0;
+  }
+  10% {
+    transform: translateY(-100%);
+    opacity: .2;
+  }
+  15% {
+    transform: translateY(-40%);
+    opacity: .5;
+  }
+  20% {
+    transform: translateY(-20%);
+    opacity: .7;
+  }
+  25% {
+    transform: translateY(-2%);
+  }
+  33% { /* 33 or 35 is suitable */
+    transform: translateY(-5%);
+  }
+  50% {
+    transform: translateY(0%);
+  }
+  80% {
+    transform: translateY(0%);
+  }
+  100% {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
